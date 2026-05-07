@@ -10,9 +10,7 @@ def test_login(driver):
     WebDriverWait(driver, 30).until(
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
-    WebDriverWait(driver, 30).until(
-        EC.presence_of_element_located((By.TAG_NAME, "body"))
-    )
+    
 
     login = LoginPage(driver)
     login.login(config["email"], config["password"])
