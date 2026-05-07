@@ -2,17 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pytest
 
-@pytest.fixture(scope="function")
-def driver():
 
-    options = Options()
+def get_driver():
 
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    chrome_options = Options()
 
-    driver = webdriver.Chrome(options=options)
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_argument("--disable-popup-blocking")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
 
-    yield driver
+    driver = webdriver.Chrome(options=chrome_options)
 
-    driver.quit()
+    driver.implicitly_wait(10)
+
+    return driver
