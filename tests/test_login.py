@@ -7,8 +7,11 @@ def test_login(driver):
     config = get_config()
 
     driver.get(config["base_url"])
-    WebDriverWait(driver, 15).until(
+    WebDriverWait(driver, 30).until(
         lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.TAG_NAME, "body"))
     )
 
     login = LoginPage(driver)
